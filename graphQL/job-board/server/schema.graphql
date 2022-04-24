@@ -1,0 +1,20 @@
+type Query {
+  company(id: ID!): Company
+  job(id: ID!): Job
+  jobs: [Job]
+}
+
+type Company {
+  id: ID!
+  name: String
+  description: String
+  jobs: [Job]
+}
+
+type Job {
+  id: ID! # GrapghQL provides a built-in ID, ! = can't be null
+  title: String
+  company: Company
+  description: String
+  test: String
+}
