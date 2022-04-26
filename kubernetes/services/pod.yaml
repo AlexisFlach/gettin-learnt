@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: firstpod
+  labels:
+    app: firstpod
+    release: original
+spec:
+  containers:
+  - name: nodeapp
+    image: flachens/node-app
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: firstpod-v2
+  labels:
+    app: firstpod
+    release: v2
+spec:
+  containers:
+  - name: nodeapp
+    image: flachens/node-app:v2

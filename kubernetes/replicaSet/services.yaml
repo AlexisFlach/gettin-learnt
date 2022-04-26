@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appy-webapp
+spec:
+  selector:
+      app: webapp
+  ports:
+    - name: http
+      port: 80
+      targetPort: 4000
+      nodePort: 30082
+  type: NodePort

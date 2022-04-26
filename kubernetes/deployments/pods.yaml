@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: webapp
+  replicas: 2
+  template: #template for the pods
+    metadata:
+      labels:
+        app: webapp
+    spec:  
+      containers:
+      - name: webapp
+        image: flachens/node-app:v2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
