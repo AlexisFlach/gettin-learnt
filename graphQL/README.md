@@ -449,5 +449,146 @@ const Company = {
 }
 ```
 
+#### Mutations
+
+How to modify data.
+
+Mutation is a root type, just like Query.
+
+**Schema**
+
+```
+type Mutation {
+  createJob(companyId: ID, title: String, description: String): ID
+}
+```
+
+**Resolvers**
+
+```
+const Mutation = {
+  createJob: (root, { companyId, title, description }) => {
+    return db.jobs.create({ companyId, title, description });
+  }
+}
+```
+
+**/graphql**
+
+```
+mutation($companyId: ID, $title: String, $description: String) {
+  createJob(companyId: $companyId, title: $title, description: $description)
+}
+```
+
+The Mutation root type contains all operations that have side effects, modify the data.
+
+The query root type contains all operations that read data, without modifying it.
+
+
+###### Best practises for Mutations
+
+Improve our existing mutations so that it is easier to work with from a clients perspective.
+
+**schema**
+
+```
+type Mutation {
+  createJob(companyId: ID, title: String, description: String): Job
+}
+```
+
+**resolvers**
+
+```
+const Mutation = {
+  createJob: (root, { companyId, title, description }) => {
+    const id = db.jobs.create({ companyId, title, description });
+    return db.jobs.get(id);
+  }
+}
+```
+
+**/graphql**
+
+```
+mutation($companyId: ID, $title: String, $description: String) {
+  job: createJob(companyId: $companyId, title: $title, description: $description) {
+    title,
+    description
+  }
+}
+```
+
+Even better:
+
+**schema**
+
+```
+type Mutation {
+  createJob(input: createJobInput): Job
+}
+```
+
+```
+input createJobInput {
+  companyId: ID
+  title: String
+  description: String
+}
+```
+
+**resolvers**
+
+```
+const Mutation = {
+  createJob: (root, { input }) => {
+    const id = db.jobs.create(input);
+    return db.jobs.get(id);
+  }
+}
+```
+
+**/graphql**
+
+```
+mutation CreateJob($input: createJobInput) {
+  job: createJob(input: $input) {
+    id,
+    title, 
+    description
+  }
+}
+```
+
+###### Calling a Mutation from the Client
+
+```
+export async function createJob(input) {
+  const mutation = `
+  mutation CreateJob($input: createJobInput) {
+    job: createJob(input: $input) {
+      id,
+      title, 
+      description
+    }
+  }
+  `
+  const { job } = await graphqlRequest(mutation, { input })
+  return job;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 https://graphql.org/
 https://www.apollographql.com/docs/apollo-server/migration/

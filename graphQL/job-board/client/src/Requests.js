@@ -77,3 +77,17 @@ export const loadJob = async (id) => {
   return job
 
 }
+
+export async function createJob(input) {
+  const mutation = `
+  mutation CreateJob($input: createJobInput) {
+    job: createJob(input: $input) {
+      id,
+      title, 
+      description
+    }
+  }
+  `
+  const { job } = await graphqlRequest(mutation, { input })
+  return job;
+}
