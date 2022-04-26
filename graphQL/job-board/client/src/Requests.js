@@ -1,16 +1,21 @@
-import axios from 'axios'
+import { isLoggedIn, getAccessToken } from './auth'
 
 const URL = 'http://localhost:9000/graphql'
 
 async function graphqlRequest(query, variables = {}) {
-  const res = await fetch(URL, {
+  const request = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       query,
       variables
     })
-  })
+  }
+
+  if (isLoggedIn()) {
+    request.headers[ 'authorization' ] = 'Bearer ' + getAccessToken()
+  }
+  const res = await fetch(URL, request)
   const resBody = await res.json()
   if (resBody.errors) {
     const msg = resBody.errors.map((err) => err.message).join('\n')
