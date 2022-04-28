@@ -27,3 +27,4 @@ export function isLoggedIn() {
 export function logout() {
   localStorage.removeItem(accessTokenKey);
 }
+  

@@ -1,7 +1,42 @@
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from 'apollo-boost'
+import gql from 'graphql-tag'
 import { isLoggedIn, getAccessToken } from './auth'
 
 const URL = 'http://localhost:9000/graphql'
 
+const authLink = new ApolloLink((operation, forward) => {
+  if (isLoggedIn()) {
+    // request.headers[ 'authorization' ] = 'Bearer ' + getAccessToken()
+    operation.setContext({
+      headers: {
+        'authorization': 'Bearer ' + getAccessToken()
+      }
+    })
+  }
+  return forward(operation)
+})
+
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    authLink,
+    new HttpLink({ uri: URL })
+  ]),
+  cache: new InMemoryCache()
+})
+
+const jobQuery = gql`
+  query JobQuery($id: ID!){
+    job(id:$id) {
+      id,
+      title,
+      company {
+        id,
+        name,
+      }
+      description
+    }
+  }
+`;
 async function graphqlRequest(query, variables = {}) {
   const request = {
     method: 'POST',
@@ -25,7 +60,7 @@ async function graphqlRequest(query, variables = {}) {
 }
 
 export const loadCompany = async (id) => {
-  const query = `query CompanyQuery($id: ID!){
+  const query = gql`query CompanyQuery($id: ID!){
     company(id:$id) {
       id
       name
@@ -41,12 +76,13 @@ export const loadCompany = async (id) => {
     }
   }
 `
-  const { company } = await graphqlRequest(query, { id })
+  // const { company } = await graphqlRequest(query, { id })
+  const { data: { company } } = client.query({ query, variables: { id } })
   return company
 }
 
 export const loadJobs = async () => {
-  const query = `
+  const query = gql`
       {
         jobs {
           id,
@@ -60,31 +96,29 @@ export const loadJobs = async () => {
         }
       }
       `
-  const { jobs } = await graphqlRequest(query);
+  // const { jobs } = await graphqlRequest(query)
+  const { data: { jobs } } = await client.query({ query, fetchPolicy: 'no-cache' });
   return jobs;
-
 }
 export const loadJob = async (id) => {
-  console.log(id)
-  const query = `query JobQuery($id: ID!){
-      job(id:$id) {
-        id,
-        title,
-        company {
-          id,
-          name,
-        }
-        description
-      }
-    }
-  `
-  const { job } = await graphqlRequest(query, { id })
+  // const query = gql`query JobQuery($id: ID!){
+  //     job(id:$id) {
+  //       id,
+  //       title,
+  //       company {
+  //         id,
+  //         name,
+  //       }
+  //       description
+  //     }
+  //   }
+  // `
+  const { data: { job } } = await client.query({ query: jobQuery, variables: { id } });
   return job
-
 }
 
 export async function createJob(input) {
-  const mutation = `
+  const mutation = gql`
   mutation CreateJob($input: createJobInput) {
     job: createJob(input: $input) {
       id,
@@ -93,6 +127,16 @@ export async function createJob(input) {
     }
   }
   `
-  const { job } = await graphqlRequest(mutation, { input })
+  // const { job } = await graphqlRequest(mutation, { input })
+  const { data: { job } } = await client.mutate({
+    mutation, variables: { input }, update: (cache, { data }) => {
+      // console.log(mutationResult)
+      cache.writeQuery({
+        query: jobQuery,
+        variables: { id: data.job.id },
+        data
+      })
+    }
+  })
   return job;
 }

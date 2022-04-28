@@ -611,7 +611,7 @@ Http headers
 {
   "authorization: "Bearer jospsjopsj..."
 }
-
+```
 The express jwt will now find the token that we sent in the authorization header, validate it, decode it, put it on the request, and from there, we sat it on the context.
 
 ```
@@ -692,6 +692,132 @@ const Mutation = {
   }
 }
 ```
+
+#### Apollo Client
+
+"Bind GraphQL data to your UI with one function call"
+
+The *problem* we have right now is that every time we display a new component a request will be made.
+
+We can use Apollo Clien for caching.
+
+###### Apollo Client Setup and Making Queries
+
+```
+npm i apollo-boost graphql
+```
+
+```
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost'
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: URL,
+  }),
+  cache: new InMemoryCache()
+})
+
+export const loadJobs = async () => {
+  const query = gql`
+      {
+        jobs {
+          id,
+          title,
+          description,
+          company {
+            id,
+            name,
+            description
+          }
+        }
+      }
+      `
+
+  const { data: { jobs } } = await client.query({ query });
+  return jobs;
+}
+```
+
+###### Authentication with ApolloLink
+
+we are now using apollo client for all of our HTTP Requests.
+
+We can use client.query to make queries
+
+and
+
+client.mutate for mutations
+
+We also need to apply the gql function to all our query strings before passing them to the apollo client.
+
+---
+
+The problem we have at this point is when we try and post a new job we get an error saying "unaothorized".
+
+We are not sending an authenticated request. 
+
+```
+const authLink = new ApolloLink((operation, forward) => {
+  if (isLoggedIn()) {
+    // request.headers[ 'authorization' ] = 'Bearer ' + getAccessToken()
+    operation.setContext({
+      headers: {
+        'authorization': 'Bearer ' + getAccessToken()
+      }
+    })
+  }
+  return forward(operation)
+})
+
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    authLink,
+    new HttpLink({ uri: URL })
+  ]),
+  cache: new InMemoryCache()
+})
+```
+
+###### Caching and Fetch Policy
+
+
+const { data: { jobs } } = await client.query({ query, fetchPolicy: 'no-cache' });
+
+#### Updating the Cache after a mutation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
