@@ -4,66 +4,79 @@ notes from the course
 
 https://www.udemy.com/course/graphql-by-example/
 
-#### What is GraphQL?
 
-A query language for your API.
-
-We can say that GrapghQL is comparable to SQL, but used for queuering your api, rather than the database.
-
-There our other ways to call APIs, the most popular being REST, so why GraphQL?
-
-- Ask for what you need, get exactly that
-  - The client has full controll of what he wants from the server
-
-With Restful APIs, when you request a resource, you always get all the data for that resource, which can result in "over-fetching".
-
-With GraphQL you can also describe what is possible with a **type system**: you write a schema that fully describes your API.
-
-We can also evolve our API without versioning, meaning add extra features without breaking backwards compatability.
-
-#### Fundamentals
-
-###### Defining a Schema
-
-Writing a schema definition for our first Graphql API.
-
-```graphql
-const { gql } = require('apollo-server')
-
-const typeDefs = gql`
-  type Query {
-    greeting: String
-  }
-`;
+## Fundamentals
+#### Schema Definition Language
 
 ```
+npm i apollo-server graphql
+```
 
-The client can now call the server and ask for a greeting; the interface for our API.
+graphql contains all the graphql functionality
 
-###### Implementing Resolver Functions
+apollo-server makes it possible to serve over HTTP.
 
-Time to provide an implementation; specify exactly how the server returns a greeting value.
+**server.js**
 
-```graphql
-// needs to match the structure of our type definitions
+The first thing we do is to create our graphql schema, which describes what our api can do.
+
+```
+// Type definitions
+const typeDefs = `
+// Here we use a special syntax called the graphql schema definition language
+type Query {
+greeting: String
+}
+`
+```
+
+We always have to use the Query type, which lists all the queries that can made from our client.
+
+We can parse the schema using a function from the apollo-server module.
+
+```
+import { gql } from 'apollo-server'
+
+const typeDefs = gql`
+type Query {
+  greeting: String
+}
+`
+```
+
+gql is a tag function. We tag our template literal. The gql function parses the string into a graphql schema object. 
+
+#### Resolver functions
+
+In the previous section we created the interface for our api. Now it is time to implement it, using a resolver and specify exactly how the server returns a greeting value.
+
+The resolver needs to match the structure of our type definitions craeted in the typeDefs variable, just like a class that implements an interface.
+
+```
 const resolvers = {
   Query: {
     greeting: () => 'Hello World'
   }
-}
+} 
 ```
 
-###### Start Apollo Server
+This function will be called by the graphql engine every time a client sends a greeting query.
+In other words: this function will be called to resolve the value of the greeting field. That is why it is called a resolver function.
 
-```javascript
+To create a server we need to import teh ApolloServer class from the 'apollo-server' module.
+
+```
 const server = new ApolloServer({ typeDefs, resolvers })
-server.listen({ port: 9000 })
-  .then((serverInfo) => console.log(`Server running at ${serverInfo.url}`)
 ```
 
-###### Querying with the Query Language
+```
+const serverInfo = await server.listen({ port: 9000 })
+console.log(`Server running at ${serverInfo.url}`)
+```
 
-localhost: 9000 -> GraphQl Playground
+###### Query Language
+
+A visit to localhost:9000 will redirect us to the graphql sandbox.
 
 ```
 query {
@@ -71,7 +84,7 @@ query {
 }
 ```
 
-Response:
+Interestingly, the response is enclosed in another object called "data":
 
 ```
 {
@@ -81,38 +94,100 @@ Response:
 }
 ```
 
-Why is the response wrapped in a data object? It is because we can receive another top-level field ie if we make an invalid request, we get "error", with information about the request, instead of "data".
+The reason for this is that we could have another json response that does not include data. If we send an invalid query
 
-###### Writing a GraphQL Client
+response:
 
-**client/app.js**
+```
+{
+  "errors": [
+    {
+      "message": '...'
+    }
+  ]
+}
+```
 
-```javascript
-const URL = 'http://localhost:9000/'
+The default operation is a query, so it could be omitted.
+
+Lets take a moment to understand the relationship between a graphql query and the schema defined in the server.
+
+```
+query -> matches the Query Type in the schema { 
+  greeting
+}
+```
+
+This is how it looks:
+```
+const typeDefs = gql`
+
+schema {
+  query: Query
+}
+
+type Query {
+  greeting: String
+}
+`
+```
+
+But its not visible because it is the default.
+
+###### GraphQL over HTTP
+
+The apollo graphql sandbox is used as a HTTP Client. An application that runs in the browser and sends requests to our graphql server.
+
+inspect:
+
+General
+```
+Request URL: http://localhost:9000/
+Request Method: POST -> different from the typical REST API. With Graphql we always make a post request, even if want to get something.
+Status Code: 200 OK
+```
+
+Request Headers
+```
+content-type: application/json
+
+```
+
+The Request Payload (the body of the request) we can see that it is a json object with two properties; query and variables.
+
+The response is also in JSON format.
+
+###### GraphQL client
+
+```
+const GRAPHQL_URL = 'http://localhost:9000/';
 
 async function fetchGreeting() {
-  const response = await fetch(URL, {
+  const response = await fetch(GRAPHQL_URL, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       query: `
-        query {
-          greeting
-        }
+      query {
+        greeting
+      }
       `
     })
   })
-  const { data } = await response.json()
-  return data
+  const { data } = await response.json();
+  return data;
 }
 
+const element = document.getElementById('greeting');
+element.textContent = 'Loading...'
+
 fetchGreeting().then(({ greeting }) => {
-  const title = document.querySelector('h1')
-  title.textContent = greeting;
+  element.textContent = greeting;
 })
 ```
+
 
 #### Queries - Job Board Application
 

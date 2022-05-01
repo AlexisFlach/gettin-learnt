@@ -1,15 +1,11 @@
-const { ApolloServer, gql } = require('apollo-server')
+import { ApolloServer, gql } from 'apollo-server'
 
 const typeDefs = gql`
-  schema {
-    Query: query
-  }
-  type Query {
-    greeting: String
-  }
-`;
+type Query {
+  greeting: String
+}
+`
 
-// needs to match the structure of our type definitions
 const resolvers = {
   Query: {
     greeting: () => 'Hello World'
@@ -17,5 +13,6 @@ const resolvers = {
 }
 
 const server = new ApolloServer({ typeDefs, resolvers })
-server.listen({ port: 9000 })
-  .then((serverInfo) => console.log(`Server running at ${serverInfo.url}`))
+
+const serverInfo = await server.listen({ port: 9000 })
+console.log(`Server running at ${serverInfo.url}`)
