@@ -1,0 +1,15 @@
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\tets.exe
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\tets.deps.json
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\tets.runtimeconfig.json
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\tets.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\ref\tets.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\bin\Debug\net6.0\tets.pdb
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.csproj.AssemblyReference.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.AssemblyInfoInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.AssemblyInfo.cs
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.csproj.CoreCompileInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\ref\tets.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.pdb
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\tets\obj\Debug\net6.0\tets.genruntimeconfig.cache

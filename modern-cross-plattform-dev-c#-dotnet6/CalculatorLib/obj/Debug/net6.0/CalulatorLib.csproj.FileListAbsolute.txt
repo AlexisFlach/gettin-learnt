@@ -1,0 +1,12 @@
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\bin\Debug\net6.0\CalulatorLib.deps.json
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\bin\Debug\net6.0\CalulatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\bin\Debug\net6.0\ref\CalulatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\bin\Debug\net6.0\CalulatorLib.pdb
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.csproj.AssemblyReference.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.AssemblyInfoInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.AssemblyInfo.cs
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.csproj.CoreCompileInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\ref\CalulatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalulatorLib\obj\Debug\net6.0\CalulatorLib.pdb

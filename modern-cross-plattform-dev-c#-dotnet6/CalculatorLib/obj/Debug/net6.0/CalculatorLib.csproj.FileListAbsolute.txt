@@ -1,0 +1,12 @@
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\bin\Debug\net6.0\CalculatorLib.deps.json
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\bin\Debug\net6.0\CalculatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\bin\Debug\net6.0\ref\CalculatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\bin\Debug\net6.0\CalculatorLib.pdb
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.csproj.AssemblyReference.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.AssemblyInfoInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.AssemblyInfo.cs
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.csproj.CoreCompileInputs.cache
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\ref\CalculatorLib.dll
+C:\Users\Alexis Flach\Documents\project\gettinlearnt\modern-cross-plattform-dev-c#-dotnet6\CalculatorLib\obj\Debug\net6.0\CalculatorLib.pdb
